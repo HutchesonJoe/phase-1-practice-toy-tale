@@ -92,19 +92,16 @@ function addNewToy(e){
    
    let likedToy = e.target
    let likedToyId = likedToy.id
-   likedToyDiv = likedToy.parentElement
-   let likesCount = document.querySelector(".likes")
-   console.log(likesCount)
-   let likedToyDivText = likedToyDiv.querySelector(".likes").textContent
-   let splitLikedToyDivText = likedToyDivText.split('')
-   let likes = splitLikedToyDivText[0]
+   let toyCard = likedToy.previousSibling;
+   console.log(toyCard)
+   let likedToyDivText = toyCard.textContent
+   let splitLikedToyDivText = likedToyDivText.split(' ')
+   let likes = parseInt(splitLikedToyDivText[0],10)
    let newLikes = likes++
    
    likedToyDivText.replace(likes, newLikes)
     
-   likesCount.textContent = `${likes} likes!`
-   
-  
+   toyCard.textContent = `${likes} likes!`
 
     fetch(`http://localhost:3000/toys/${likedToyId}`,{
       method: 'PATCH',
@@ -123,9 +120,9 @@ function addNewToy(e){
       return response.json();
     }
     )
-    .then(function(likedObj){
-      console.log(likedObj)
-    })
+    // .then(function(likedObj){
+    //   console.log(likedObj)
+    // })
     
   }
   
